@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicine Information System</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    margin: 0;
+    padding: 20px;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Search */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input, select {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #000;
+    color: white;
+    cursor: pointer;
+}
+
+/* Card */
+.card {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+}
+
+.detail {
+    margin: 10px 0;
+}
+
+.label {
+    font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+
+<h1>💊 Medicine Information System</h1>
+
+<div class="container">
+
+    <!-- Search -->
+    <div class="search-box">
+        <select id="medicineSelect">
+            <option value="">Select Medicine</option>
+        </select>
+        <button onclick="showMedicine()">Show Info</button>
+    </div>
+
+    <!-- Result -->
+    <div class="card" id="card">
+        <h2 id="name"></h2>
+
+        <p class="detail"><span class="label">Uses:</span> <span id="uses"></span></p>
+        <p class="detail"><span class="label">Side Effects:</span> <span id="side"></span></p>
+        <p class="detail"><span class="label">Dosage:</span> <span id="dosage"></span></p>
+        <p class="detail"><span class="label">Price:</span> ₹<span id="price"></span></p>
+        <p class="detail"><span class="label">Manufacturer:</span> <span id="manu"></span></p>
+    </div>
+
+</div>
+
+<script>
+
+// Medicine Database
+const medicines = {
+    "Paracetamol": {
+        uses: "Fever, mild pain relief",
+        side: "Rare allergy, nausea",
+        dosage: "500mg every 6 hours",
+        price: "20",
+        manu: "Cipla"
+    },
+    "Dolo 650": {
+        uses: "Fever, body pain",
+        side: "Liver damage (overdose)",
+        dosage: "650mg after food",
+        price: "35",
+        manu: "Micro Labs"
+    },
+    "Crocin": {
+        uses: "Fever, headache",
+        side: "Allergic reaction",
+        dosage: "500mg tablet",
+        price: "30",
+        manu: "GSK"
+    },
+    "Azithromycin": {
+        uses: "Bacterial infections",
+        side: "Diarrhea, stomach pain",
+        dosage: "500mg once daily",
+        price: "120",
+        manu: "Sun Pharma"
+    },
+    "Amoxicillin": {
+        uses: "Infections (bacterial)",
+        side: "Rash, nausea",
+        dosage: "250-500mg 3 times daily",
+        price: "80",
+        manu: "Cipla"
+    },
+    "Cetirizine": {
+        uses: "Allergy, cold",
+        side: "Drowsiness",
+        dosage: "10mg once daily",
+        price: "15",
+        manu: "Dr Reddy's"
+    },
+    "Ibuprofen": {
+        uses: "Pain, inflammation",
+        side: "Stomach irritation",
+        dosage: "200-400mg",
+        price: "25",
+        manu: "Abbott"
+    },
+    "ORS": {
+        uses: "Dehydration",
+        side: "No major side effects",
+        dosage: "As needed",
+        price: "20",
+        manu: "WHO Formula"
+    }
+};
+
+// Load dropdown
+let select = document.getElementById("medicineSelect");
+for (let med in medicines) {
+    let option = document.createElement("option");
+    option.value = med;
+    option.text = med;
+    select.appendChild(option);
+}
+
+// Show info
+function showMedicine() {
+    let selected = select.value;
+
+    if (!selected) {
+        alert("Select a medicine!");
+        return;
+    }
+
+    let med = medicines[selected];
+
+    document.getElementById("card").style.display = "block";
+
+    document.getElementById("name").innerText = selected;
+    document.getElementById("uses").innerText = med.uses;
+    document.getElementById("side").innerText = med.side;
+    document.getElementById("dosage").innerText = med.dosage;
+    document.getElementById("price").innerText = med.price;
+    document.getElementById("manu").innerText = med.manu;
+}
+
+</script>
+
+</body>
+</html>
